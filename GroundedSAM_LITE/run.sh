@@ -2,14 +2,17 @@
 
 # Base command for training
 BASE_CMD="python -W ignore grounded_sam_demo_all.py \
---config GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py \
---grounded_checkpoint /home/xiongbutian/workspace/GroundingSAM_Fast/groundingdino_swint_ogc.pth \
---sam_checkpoint /home/xiongbutian/workspace/GroundingSAM_Fast/sam_vit_h_4b8939.pth \
+--config <Where your Grounding DINO model config file is located> xxx/GroundingDINO_SwinT_OGC.py \
+--grounded_checkpoint <Where your GroundingDINO model is located> xxx/groundingdino_swint_ogc.pth \
+--sam_checkpoint <Where you SAM model is located> sam_vit_h_4b8939.pth \
 --device cuda \
---debugging True"
+--debugging <When set to true, it will save some segmented picture out here> True"
 
 # Define the datasets
+
 DATASETS=(
+    # If you have multiple COLMAP dataset, you can put it here. 
+    # This will allow you run multiple experiment in parallel
     /data/grocery_store/10F
 )
 
