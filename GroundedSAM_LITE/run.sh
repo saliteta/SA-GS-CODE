@@ -43,7 +43,7 @@ for i in "${!DATASETS[@]}"; do
     echo "Saving images at: ${output_img}"
     
     # Run the model with the specific GPU
-    CUDA_VISIBLE_DEVICES=$(($i + 4)) $BASE_CMD --image_dir "${DATASETS[$i]}/images/" -o $output/$DATASET_NAME --prompts_file prompt.txt > "$LOG_FILE_NAME" 2>&1 &
+    CUDA_VISIBLE_DEVICES=$(($i)) $BASE_CMD --image_dir "${DATASETS[$i]}/images/" -o $output/$DATASET_NAME --prompts_file prompt.txt > "$LOG_FILE_NAME" 2>&1 &
 done
 
 # Wait for all background jobs to complete
