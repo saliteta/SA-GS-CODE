@@ -14,6 +14,6 @@ dependencies:
   - tqdm
   - pip:
     - dynamic_training/submodules/diff-gaussian-rasterization
-    - submodules/simple-knn
+    - dynamic_training/submodules/simple-knn
     - GroundedSAM_LITE/GroundingDINO
     - opencv-python

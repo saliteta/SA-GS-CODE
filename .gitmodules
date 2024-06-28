@@ -1,0 +1,9 @@
+[submodule "dynamic_training/sibr_core"]
+	path = dynamic_training/sibr_core
+	url = https://gitlab.inria.fr/sibr/sibr_core.git
+[submodule "dynamic_training/submodules/simple-knn"]
+	path = dynamic_training/submodules/simple-knn
+	url = https://gitlab.inria.fr/bkerbl/simple-knn.git
+[submodule "dynamic_training/submodules/diff_gaussian_rasterization/third_party/glm"]
+	path = dynamic_training/submodules/diff_gaussian_rasterization/third_party/glm
+	url = https://github.com/g-truc/glm.git

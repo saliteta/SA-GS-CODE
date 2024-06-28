@@ -5,19 +5,8 @@
 - Clone Code
 
 ```bash
-git clone https://github.com/saliteta/SA-GS-CODE.git
+git clone --recursive https://github.com/saliteta/SA-GS-CODE.git
 cd SA-GS-CODE
-
-cd dynamic_training/
-git clone https://gitlab.inria.fr/sibr/sibr_core.git
-
-cd submodules/
-git clone https://gitlab.inria.fr/bkerbl/simple-knn.git
-
-cd diff-gaussian-rasterization/
-cd third_party/
-git clone https://github.com/g-truc/glm.git
-cd ../../../../
 ```
 
 - Install Environment
