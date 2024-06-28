@@ -13,7 +13,7 @@ dependencies:
   - torchvision=0.13.1
   - tqdm
   - pip:
-    - dynamic_training/submodules/diff-gaussian-rasterization
+    - dynamic_training/submodules/diff_gaussian_rasterization
     - dynamic_training/submodules/simple-knn
     - GroundedSAM_LITE/GroundingDINO
     - opencv-python
