@@ -123,6 +123,7 @@ def sam(image_path, model, predictor, prompts, debugging, args):
     predictor.set_image(image)
     H, W = size[0], size[1]
     masks_prompt_list = []
+    masks_prompt_list.append(torch.zeros((H,W)))
     for idx, text_prompt in enumerate(prompts):
         # run grounding dino model
         boxes_filt = get_grounding_output(
@@ -133,19 +134,21 @@ def sam(image_path, model, predictor, prompts, debugging, args):
             boxes_filt[i][:2] -= boxes_filt[i][2:] / 2
             boxes_filt[i][2:] += boxes_filt[i][:2]
         boxes_filt = boxes_filt
-        transformed_boxes = predictor.transform.apply_boxes_torch(boxes_filt, image.shape[:2]).to(device)
-        masks, _, _ = predictor.predict_torch(
-            point_coords = None,
-            point_labels = None,
-            boxes = transformed_boxes.to(device),
-            multimask_output = False,
-        )
-        if debugging == 'True':
-            debuging_save_jpg(output_dir, masks, basename, text_prompt)
-        masks_prompt_list.append(per_caption_data(masks, idx+1))
-        
+        try: 
+            transformed_boxes = predictor.transform.apply_boxes_torch(boxes_filt, image.shape[:2]).to(device)
+            masks, _, _ = predictor.predict_torch(
+                point_coords = None,
+                point_labels = None,
+                boxes = transformed_boxes.to(device),
+                multimask_output = False,
+            )
+            if debugging == 'True':
+                debuging_save_jpg(output_dir, masks, basename, text_prompt)
+            masks_prompt_list.append(per_caption_data(masks, idx+1))
+        except:
+            continue
+
     final_mask = torch.max(torch.stack(masks_prompt_list),dim=0)[0]-1
-    
     np.savez(os.path.join(output_dir,'npz',basename[0]), final_mask.cpu().numpy())
     
     
@@ -185,14 +188,5 @@ if __name__ == "__main__":
 
     print('model initialization is accomplished')    
     print(f'The output file will be in folder: {output_dir}')    
-    process_pool= []
-    multiprocessing.set_start_method('spawn', force=True)
     for image_path in tqdm(sorted(os.listdir(image_dir))):
-        process_pool.append(multiprocessing.Process(target=sam, args=(image_path, model, predictor, prompts, debugging, args)))
-        process_pool[-1].start()
-        if len(process_pool) == batch_num:
-            for process in process_pool:
-                process.join()
-            process_pool.clear()
-    for process in process_pool:
-        process.join()
+        sam(image_path, model, predictor, prompts, debugging, args)

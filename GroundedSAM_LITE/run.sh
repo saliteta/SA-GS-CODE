@@ -29,8 +29,8 @@ mkdir -p $output
 for i in "${!DATASETS[@]}"; do
     DATASET_NAME=$(basename "${DATASETS[$i]}")
     LOG_FILE_NAME="./logs/${MISSION_START_DATE}_${DATASET_NAME}.txt"
-    output_npz="./${outpit}/${DATASET_NAME}/npz"
-    output_img="./${outpit}/${DATASET_NAME}/img"
+    output_npz="${output}/${DATASET_NAME}/npz"
+    output_img="${output}/${DATASET_NAME}/img"
     
     # Ensure directories exist
     mkdir -p $output_npz

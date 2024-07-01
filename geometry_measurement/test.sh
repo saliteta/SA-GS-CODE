@@ -13,11 +13,11 @@ DATASETS=(
 )
 
 mask_folders=(
-    ../GroundedSAM_LITE/output/10F/npz
+    /home/xiongbutian/workspace/SA-GS/GroundedSAM_LITE/output/10F/npz
 )
 
 prompts=(
-    ../prompt.txt
+    /home/xiongbutian/workspace/SA-GS/GroundedSAM_LITE/prompt.txt
 )
 
 

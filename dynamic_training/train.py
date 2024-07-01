@@ -126,9 +126,8 @@ def training(
         ############################################################################################
 
 
-
         loss = (1.0 - opt.lambda_dssim- opt.lambda_shape) * Ll1 + opt.lambda_dssim * (1.0 - ssim(image, gt_image)) + opt.lambda_shape * shape_loss
-        loss.backward()
+        loss.backward(retain_graph=True)
         ## shoud send back to cpu
         gt_image.to(dataset.data_device)
         semantic_mask.to(dataset.data_device)

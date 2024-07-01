@@ -39,7 +39,7 @@ for i in "${!DATASETS[@]}"; do
     --data_device cpu \
     --port $PORT \
     -m "../output/${DATASET_NAME}" \
-    --mask_path "/home/xiongbutian/workspace/SA-GS/GroundedSAM_LITE/output/10F/npz"\
+    --mask_path "path/to/the/masks"\
     --perplexity_path $COMPLEXITY > "$LOG_FILE_NAME" 2>&1 &
 done
 
